@@ -60,7 +60,7 @@ export default function CanvasUI({ brushColor, setBrushColor, brushSize, setBrus
         <div>
           <input type="color" value={brushColor} onChange={e => setBrushColor(e.target.value)} />
           <input type="range" min="1" max="50" value={brushSize} onChange={e => setBrushSize(e.target.value)} />
-          <button onClick={() => onDrawToAR(canvasRef)}>Draw → AR</button>
+          <button onClick={() => onDrawToAR(canvasRef.current)}>Draw → AR</button>
         </div>
         <button onClick={() => {
           const ctx = canvasRef.current.getContext('2d')
