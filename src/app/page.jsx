@@ -56,7 +56,7 @@
 'use client'
 
 import { useState } from 'react'
-import ARScene from '../../components/ARScene'
+import ARScene from '@/components/ARScene'
 
 export default function DrawingARPage() {
   const [color, setColor] = useState('#ff00ff')
