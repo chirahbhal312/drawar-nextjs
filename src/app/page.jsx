@@ -12,14 +12,21 @@ export default function DrawingARPage() {
   const [currentMaterial, setCurrentMaterial] = useState(null)
   const [allowPlacement, setAllowPlacement] = useState(false)
 
-  const handleDrawToAR = (canvasRef) => {
-    const dataURL = canvasRef.current.toDataURL('image/png')
-    const loader = new THREE.TextureLoader()
-    loader.load(dataURL, texture => {
-      setCurrentMaterial(new THREE.MeshBasicMaterial({ map: texture, transparent: true }))
-      setAllowPlacement(true)
-    })
-  }
+  const handleDrawToAR = (canvasEl) => {
+  if (!canvasEl) return
+
+  const dataURL = canvasEl.toDataURL('image/png')
+  const loader = new THREE.TextureLoader()
+
+  loader.load(dataURL, (texture) => {
+    const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true })
+    setCurrentMaterial(material)
+    setAllowPlacement(true) // ✅ Now allow AR placement
+  }, undefined, (err) => {
+    alert("Texture loading failed", err)
+  })
+}
+
 
   return (
     <>

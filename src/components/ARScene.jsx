@@ -23,18 +23,20 @@ export default function ARScene({ currentMaterial, allowPlacement }) {
     scene.add(controller)
 
     controller.addEventListener('select', () => {
-      if (!allowPlacement || !currentMaterial) return
+  if (!allowPlacement || !currentMaterial) return
 
-      const aspect = window.innerWidth / window.innerHeight
-      const geometry = new THREE.PlaneGeometry(0.4, 0.4 / aspect)
-      const mesh = new THREE.Mesh(geometry, currentMaterial.clone())
+  const aspect = window.innerWidth / window.innerHeight
+  const geometry = new THREE.PlaneGeometry(0.4, 0.4 / aspect)
+  const mesh = new THREE.Mesh(geometry, currentMaterial.clone())
 
-      const cameraDir = new THREE.Vector3()
-      camera.getWorldDirection(cameraDir)
-      mesh.position.copy(camera.position).add(cameraDir.multiplyScalar(1.5))
-      mesh.quaternion.copy(camera.quaternion)
-      scene.add(mesh)
-    })
+  const cameraDir = new THREE.Vector3()
+  camera.getWorldDirection(cameraDir)
+  mesh.position.copy(camera.position).add(cameraDir.multiplyScalar(1.5))
+  mesh.quaternion.copy(camera.quaternion)
+
+  scene.add(mesh)
+})
+
 
     renderer.setAnimationLoop(() => renderer.render(scene, camera))
 
